@@ -1,4 +1,4 @@
-class projetpropre extends Program{
+class diplodocalcul extends Program{
   /*Diplodocalcul:
   logiciel ludo-éducatif destiné à des élèves de 5 à 11 ans les guidant dans leur apprentissage des mathématiques.
   Logiciel créé dans le cadre du controle continu du module d'algorithmique et programmation du DUT informatique à l'IUTA de Lille 1 pour l'année 2011-2012.
