@@ -1,5 +1,4 @@
 class projetpropre extends Program{
-int 
     void algorithm(){
     int difficulte,niveau,operande1,operande2,reponseADonner,reponseEleve,mode;
     boolean continuerCalcul=false,niveauCorrect=false,nomEtPrenom=false,modeCorrect=false;
