@@ -1,0 +1,3 @@
+Afin de permettre à l'instituteur de surveiller la progression des élèves, les statistiques doivent être enregistrées.
+
+DATE|PRENOM|NIVEAU|SCORE
