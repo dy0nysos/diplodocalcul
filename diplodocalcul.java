@@ -5,6 +5,7 @@ class diplodocalcul extends Program{
   Il est distribué sous licence Mozilla Foundation et disponible gratuitement. Le code source est également disponible
   */
   /*doc pour la fonction de génération de calcul:
+  http://java.developpez.com/faq/java/?page=langage_chaine#LANGAGE_STRING_chaine_en_nombre
 String phrase = "12";
 int i;
 i = Integer.parseInt(phrase);
