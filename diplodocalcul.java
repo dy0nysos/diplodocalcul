@@ -4,6 +4,12 @@ class diplodocalcul extends Program{
   Logiciel créé dans le cadre du controle continu du module d'algorithmique et programmation du DUT informatique à l'IUTA de Lille 1 pour l'année 2011-2012.
   Il est distribué sous licence Mozilla Foundation et disponible gratuitement. Le code source est également disponible
   */
+  /*doc pour la fonction de génération de calcul:
+String phrase = "12";
+int i;
+i = Integer.parseInt(phrase);
+Permet de convertir un String en int. Pour nous, on créé un String avec les opérandes et l'opérateur et on convertit ;)
+*/
     void algorithm(){
     int difficulte,niveau,operande1,operande2,reponseADonner,reponseEleve,mode;
     boolean continuerCalcul=false,niveauCorrect=false,nomEtPrenom=false,modeCorrect=false;
