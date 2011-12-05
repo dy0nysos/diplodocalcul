@@ -1,6 +1,6 @@
 class fonctioncalcul extends Program{
     void algorithm(){
-	int operande1,operande2,resultat,difficulte=4,operateurmodif;
+	int operande1,operande2,resultat=0,difficulte=4,operateurmodif;
 	String operateurs;
 	String [] operateur  = new String [4];
 	operateur[0]="+";
@@ -23,7 +23,7 @@ class fonctioncalcul extends Program{
 	}
 	else
 	    {
-		while(operande1<operande2 || operande1%operande2!=0 ){
+		while((operande1<operande2 || operande1%operande2!=0) && operande2!=0 ){
 		    operande1=(int)(random()*difficulte);
 		    operande2=(int)(random()*difficulte);
 		    resultat=(operande1/operande2);}
