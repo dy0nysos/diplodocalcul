@@ -39,7 +39,7 @@ class diplodocalcul extends Program{
 	return reponseADonner;
     }
     void algorithm(){
-	int difficulte=5,niveau=3,operande1,operande2,reponseADonner,reponseEleve,mode=0;
+	int difficulte=5,niveau=3,reponseADonner,reponseEleve,mode=0;
 	boolean continuerCalcul=false,niveauCorrect=false,nomEtPrenom=false,modeCorrect=false;
 	String prenom="",nom="";
    //tableau d'operateurs utilisés dans la fonction calcul
@@ -81,6 +81,7 @@ class diplodocalcul extends Program{
 	    }
 	print("\n\n\n\n");
 	//Fonction génératrice de calculs en fonction du niveau. On se sert du tableau d'opérandes créée au début du programme
-	println(calcul(difficulte,niveau,operateur));
+	reponseADonner=calcul(difficulte,niveau,operateur);
+   println(reponseADonner);
     }
 }
