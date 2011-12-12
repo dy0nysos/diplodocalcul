@@ -4,18 +4,15 @@ class diplodocalcul extends Program{
       Logiciel créé dans le cadre du controle continu du module d'algorithmique et programmation du DUT informatique à l'IUTA de Lille 1 pour l'année 2011-2012.
       Il est distribué sous licence Mozilla Foundation et disponible gratuitement. Le code source est également disponible
     */
-    /*doc pour la fonction de génération de calcul:
-      http://java.developpez.com/faq/java/?page=langage_chaine#LANGAGE_STRING_chaine_en_nombre
-      String phrase = "12";
-      int i;
-      i = Integer.parseInt(phrase);
-      Permet de convertir un String en int. Pour nous, on créé un String avec les opérandes et l'opérateur et on convertit ;)
+    /* fonction calcul. on rentre la difficulte, le niveau et le tableau d'operateurs.
     */
     int calcul(int difficulte,int niveau,String [] operateur){
 	String operateurs="";
 	int operande1=0,operande2=0,reponseADonner=0;
+   //on genere une string avec un operateur choisi aleatoirement
 	operateurs=operateur[(int)(random()*(niveau+1))];
 	if(operateurs=="/"){
+   //gestion des cas menant a un divide/0 ou une opération avec reste 
 	    while(operande1==0 || operande2==0 || operande1%operande2!=0){
 		operande2=(int)(random()*difficulte);
 		operande1=(int)(random()*difficulte);
@@ -45,6 +42,7 @@ class diplodocalcul extends Program{
 	int difficulte=5,niveau=3,operande1,operande2,reponseADonner,reponseEleve,mode=0;
 	boolean continuerCalcul=false,niveauCorrect=false,nomEtPrenom=false,modeCorrect=false;
 	String prenom="",nom="";
+   //tableau d'operateurs utilisés dans la fonction calcul
 	String [] operateur  = new String [4];
 	operateur[0]="+";
 	operateur[1]="-";
