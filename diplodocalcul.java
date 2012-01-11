@@ -1,48 +1,275 @@
 class diplodocalcul extends Program{
-    /*Diplodocalcul:
-      logiciel ludo-éducatif destiné à des élèves de 5 à 11 ans les guidant dans leur apprentissage des mathématiques.
-      Logiciel créé dans le cadre du controle continu du module d'algorithmique et programmation du DUT informatique à l'IUTA de Lille 1 pour l'année 2011-2012.
-      Il est distribué sous licence Mozilla Foundation et disponible gratuitement. Le code source est également disponible
-    */
-    /* fonction calcul. on rentre la difficulte, le niveau et le tableau d'operateurs.
-    */
-    int calcul(int difficulte,int niveau,String [] operateur){
-	String operateurs="";
-	int operande1=0,operande2=0,reponseADonner=0;
-   //on genere une string avec un operateur choisi aleatoirement
-	operateurs=operateur[(int)(random()*(niveau+1))];
-	if(operateurs=="/"){
-   //gestion des cas menant a un divide/0 ou une opération avec reste 
-	    while(operande1==0 || operande2==0 || operande1%operande2!=0){
-		operande2=(int)(random()*difficulte);
-		operande1=(int)(random()*difficulte);
+    String [] reponse = new String [3];
+    void calcul(int niveau,String [] reponse){
+	/* lourde fonction permettant de gnrer deux nombres en fonction du niveau selectionn. Nous n'avons pas trouv d'optimisation */
+	double operande1=0,operande2=0;
+	String operateurChoisi;
+	String [] operateurs = new String [12];
+	operateurs[0]="+";//add simple = niveau 1
+	operateurs[1]="-";//sous simple = niveau2 
+	operateurs[2]="*";//mult 1 chiffre = niveau 3
+	operateurs[3]="+";//add complexe = niveau 4
+	operateurs[4]="-";//sous complexe = niveau 5
+	operateurs[5]="+";//add flottante = niveau 6
+	operateurs[6]="-";//sous flottante = niveau 7
+	operateurs[7]="/";//division entiere = niveau 8
+	operateurs[8]="*";//mult compliquee = niveau 9
+	operateurs[9]="/";//division  compliquee = niveau 10
+	operateurs[10]="*";//multi flottante = niveau 11
+	operateurs[11]="/";//division flottante = niveau 12
+	operateurChoisi=operateurs[(int)(random()*niveau)];
+	if(operateurChoisi.equals("+")){
+	    switch (niveau){
+	    case 1:
+		while(operande1>10 || operande1<=0){
+		    operande1=(int)(random()*11);
+		    operande2=operande1;
+		}
+		break;
+	    case 2:
+		while(operande1>10 || operande2>10 || operande1<=0 || operande2<=0){
+		    operande1=(int)(random()*11);
+		    operande2=(int)(random()*11);
+		}
+		break;
+	    case 3:
+		while(operande1>100 || operande2>100 || operande1+operande2==1000 || operande1<=0 || operande2<=0){
+		    operande1=(int)(random()*100);
+		    operande2=(int)(random()*100);
+		}
+		break;
+	    case 4:
+		while(operande1>10000 || operande2>10000 || operande1<=0 || operande2<=0){
+		    operande1=(int)(random()*10000);
+		    operande2=(int)(random()*10000);
+		}
+		break;
+	    case 5:
+		while(operande1>20000 || operande2>20000 || operande1<=0 || operande2<=0){
+		    operande1=(int)(random()*20000);
+		    operande2=(int)(random()*20000);
+		}
+		break;
+	    case 6:
+		while(operande1>50000 || operande2>50000 || operande1<=0 || operande2<=0){
+		    operande1=(random()*10000);
+		    operande2=(random()*10000);
+		}
+		break;
+	    case 7:
+		while(operande1>50000 || operande2>50000 || operande1<=0 || operande2<=0){
+		    operande1=(int)(random()*10000);
+		    operande2=(int)(random()*10000);
+		}
+		break;
+	    case 8:
+		while(operande1>50000 || operande2>50000 || operande1<=0 || operande2<=0){
+		    operande1=(int)(random()*10000);
+		    operande2=(int)(random()*10000);
+		}
+		break;
+	    case 9:
+		while(operande1>50000 || operande2>50000 || operande1<=0 || operande2<=0){
+		    operande1=(int)(random()*10000);
+		    operande2=(int)(random()*10000);
+		}
+		break;
+	    case 10:
+		while(operande1>50000 || operande2>50000 || operande1<=0 || operande2<=0){
+		    operande1=(int)(random()*10000);
+		    operande2=(int)(random()*10000);
+		}
+		break;
+	    case 11:
+		while(operande1>50000 || operande2>50000 || operande1<=0 || operande2<=0){
+		    operande1=(int)(random()*10000);
+		    operande2=(int)(random()*10000);
+		}
+		break;
+		
+	    default:
+		println("Un soucis a ete detecte");
+		break;
 	    }
-	    println(operande1+"/"+operande2);
-	    reponseADonner=(operande1/operande2);
+	}
+	//Gestion des soustractions par niveau
+	else if(operateurChoisi.equals("-")){
+	    switch (niveau){
+	    case 2:
+		while(operande1>10 || operande2>10 || operande1<=0 || operande2<=0){
+		    operande1=(int)(random()*11);
+		    operande2=(int)(random()*11);
+		}
+		break;
+	    case 3:
+		while(operande1>1000 || operande2>1000 || operande1+operande2!=1000 || operande1<=0 || operande2<=0){
+		    operande1=(int)(random()*500);
+		    operande2=(int)(random()*500);
+		    print("soucis ici");
+		}
+		break;
+	    case 4:
+		while(operande1>10000 || operande2>10000 || operande1<=0 || operande2<=0){
+		    operande1=(int)(random()*10000);
+		    operande2=(int)(random()*10000);
+		}
+		break;
+	    case 5:
+		while(operande1>50000 || operande2>50000 || operande1<=0 || operande2<=0){
+		    operande1=(int)(random()*10000);
+		    operande2=(int)(random()*10000);
+		}
+		break;
+	    case 6:
+		while(operande1>50000 || operande2>50000 || operande1<=0 || operande2<=0){
+		    operande1=(int)(random()*10000);
+		    operande2=(int)(random()*10000);
+		}
+		break;
+	    case 7:
+		while(operande1>50000 || operande2>50000 || operande1<=0 || operande2<=0){
+		    operande1=(int)(random()*10000);
+		    operande2=(int)(random()*10000);
+		}
+		break;
+	    case 8:
+		while(operande1>50000 || operande2>50000 || operande1<=0 || operande2<=0){
+		    operande1=(int)(random()*10000);
+		    operande2=(int)(random()*10000);
+		}
+		break;
+	    case 9:
+		while(operande1>50000 || operande2>50000 || operande1<=0 || operande2<=0){
+		    operande1=(int)(random()*10000);
+		    operande2=(int)(random()*10000);
+		}
+		break;
+	    case 10:
+		while(operande1>50000 || operande2>50000 || operande1<=0 || operande2<=0){
+		    operande1=(int)(random()*10000);
+		    operande2=(int)(random()*10000);
+		}
+		break;
+	    case 11:
+		while(operande1>50000 || operande2>50000 || operande1<=0 || operande2<=0){
+		    operande1=(int)(random()*10000);
+		    operande2=(int)(random()*10000);
+		}
+		break;
+	
+	    default:
+		println("Un soucis a ete detecte");
+		break;
+	    }
+	}
+	//Gestion des multiplications par niveau
+	else if(operateurChoisi.equals("*")){
+	    switch (niveau){
+	    case 3:
+		while(operande1>1000 || operande2>1000 || operande1<=0 || operande2<=0){
+		    operande1=(int)(random()*500);
+		    operande2=(int)(random()*500);
+		    print("    soucis ici     ");
+		}
+		break;
+	    case 4:
+		while(operande1>10000 || operande2>10000 || operande1<=0 || operande2<=0){
+		    operande1=(int)(random()*10000);
+		    operande2=(int)(random()*10000);
+		}
+		break;
+	    case 5:
+		while(operande1>50000 || operande2>50000 || operande1<=0 || operande2<=0){
+		    operande1=(int)(random()*10000);
+		    operande2=(int)(random()*10000);
+		}
+		break;
+	    case 6:
+		while(operande1>50000 || operande2>50000 || operande1<=0 || operande2<=0){
+		    operande1=(int)(random()*10000);
+		    operande2=(int)(random()*10000);
+		}
+		break;
+	    case 7:
+		while(operande1>50000 || operande2>50000 || operande1<=0 || operande2<=0){
+		    operande1=(int)(random()*10000);
+		    operande2=(int)(random()*10000);
+		}
+		break;
+	    case 8:
+		while(operande1>50000 || operande2>50000 || operande1<=0 || operande2<=0){
+		    operande1=(int)(random()*10000);
+		    operande2=(int)(random()*10000);
+		}
+		break;
+	    case 9:
+		while(operande1>50000 || operande2>50000 || operande1<=0 || operande2<=0){
+		    operande1=(int)(random()*10000);
+		    operande2=(int)(random()*10000);
+		}
+		break;
+	    case 10:
+		while(operande1>50000 || operande2>50000 || operande1<=0 || operande2<=0){
+		    operande1=(int)(random()*10000);
+		    operande2=(int)(random()*10000);
+		}
+		break;
+	    case 11:
+		while(operande1>50000 || operande2>50000 || operande1<=0 || operande2<=0){
+		    operande1=(int)(random()*10000);
+		    operande2=(int)(random()*10000);
+		}
+		break;
+	    default:
+		println("Un soucis");
+	    }
+	}
+	//Gestion des divisions par niveau
+	else if(operateurChoisi.equals("/")){
+	    switch (niveau){
+	    case 8:
+		while(operande1>100 || operande2>15 || operande1<=0 || operande2<=0 || operande1%operande2!=0){
+		    operande1=(int)(random()*100);
+		    operande2=(int)(random()*20);
+		}
+		break;
+	    case 9:
+		while(operande1>2500 || operande2>28 || operande1<=0 || operande2<=0 || operande1%operande2!=0){
+		    operande1=(int)(random()*2501);
+		    operande2=(int)(random()*29);
+		}
+		break;
+	    case 10:
+		while(operande1>3000 || operande2>50 || operande1<=0 || operande2<=0){
+		    operande1=(int)(random()*3001);
+		    operande2=(int)(random()*51);
+		}
+		break;
+	    case 11:
+		while(operande1>100 || operande2>10 || operande1<=0 || operande2<=0){
+		    operande1=random()*101;
+		    operande2=random()*11;
+		}
+		break;
+	    default:
+		println("Un soucis");
+	    }
 	}
 	else{
-	    operande1=(int)(random()*difficulte);
-	    operande2=(int)(random()*difficulte);
-	    if (operateurs=="+"){
-		reponseADonner=(operande1+operande2);
-		println(operande1+"+"+operande2);
-	    }
-	    else if(operateurs=="-"){
-		reponseADonner=(operande1-operande2);
-		println(operande1+"-"+operande2);
-	    }
-	    else if(operateurs=="*"){
-		reponseADonner=(operande1*operande2);
-		println(operande1+"*"+operande2);
-	    }
+	    println("probleme de niveau");
 	}
-	return reponseADonner;
+	reponse[0]=operateurChoisi;
+	reponse[1]=""+operande1;
+	reponse[2]=""+operande2;
     }
+
+
+    /*Algorithme principal */
     void algorithm(){
-	int difficulte=5,niveau=3,reponseADonner,reponseEleve,mode=0;
+	int niveau=0,reponseADonner,reponseEleve,mode=0;
 	boolean continuerCalcul=false,niveauCorrect=false,nomEtPrenom=false,modeCorrect=false;
 	String prenom="",nom="";
-   //tableau d'operateurs utilisés dans la fonction calcul
+   //tableau d'operateurs utiliss dans la fonction calcul
 	String [] operateur  = new String [4];
 	operateur[0]="+";
 	operateur[1]="-";
@@ -62,7 +289,7 @@ class diplodocalcul extends Program{
 	}
 	//enregistrement niveau
 	while(!niveauCorrect){
-	    if(niveau >=1 && niveau <= 4){
+	    if(niveau >=1 && niveau <= 12){
 		niveauCorrect=true;}
 	    else{
 		println("Veuillez choisir la classe: \n1)Grande Section\n2)Cours primaire\n3)Cours elementaire 1 et 2\n4)Cours moyen 1 et 2");
@@ -80,8 +307,11 @@ class diplodocalcul extends Program{
 		}
 	    }
 	print("\n\n\n\n");
-	//Fonction génératrice de calculs en fonction du niveau. On se sert du tableau d'opérandes créée au début du programme
-	reponseADonner=calcul(difficulte,niveau,operateur);
-   println(reponseADonner);
+	//Fonction gnratrice de calculs en fonction du niveau. On se sert du tableau d'oprandes cre au dbut du programme
+	calcul(niveau,reponse);
+	println(reponse[0]);
+	println(reponse[1]);
+	println(reponse[2]);
+	println(reponse[1]+reponse[0]+reponse[2]);
     }
 }
