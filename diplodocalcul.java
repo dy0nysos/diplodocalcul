@@ -21,13 +21,13 @@ class diplodocalcul extends Program{
     }
     //en fonction de l operateur genere on genere un calcul avec la fonction appropriee appelee dans l'algo principal
     void addition(int niveau,String [] reponse){
+	operande1=0;
+	operande2=0;
 	switch (niveau){
 	case 1:
 	    while(operande1>10 || operande1<=0){
 		operande1=(int)(random()*11);
 		operande2=operande1;
-		reponse[0]=""+operande1;
-		reponse[1]=""+operande2;
 	    }
 	    break;
 	case 2:
@@ -95,8 +95,13 @@ class diplodocalcul extends Program{
 	    println("Un soucis a ete detecte");
 		break;
 	}
+	reponse[0]=""+operande1;
+	reponse[1]=""+operande2;
     }
+    //fonction soustraction
     void soustraction(int niveau,String [] reponse){
+	operande1=0;
+	operande2=0;
 	switch (niveau){
 	case 2:
 	    while(operande1>10 || operande2>10 || operande1<=0 || operande2<=0){
@@ -105,7 +110,7 @@ class diplodocalcul extends Program{
 	    }
 	    break;
 	case 3:
-	    while(operande1>1000 || operande2>1000 || operande1+operande2!=1000 || operande1<=0 || operande2<=0){
+	    while(operande1>100 || operande2>100 || operande1+operande2>1000 || operande1<=0 || operande2<=0){
 		operande1=(int)(random()*500);
 		operande2=(int)(random()*500);
 		print("soucis ici");
@@ -164,14 +169,18 @@ class diplodocalcul extends Program{
 		println("Un soucis a ete detecte");
 		break;
 	}
+	reponse[0]=""+operande1;
+	reponse[1]=""+operande2;
     }
+    //fonction multiplication
     void multiplication(int niveau,String [] reponse){
+	operande1=0;
+	operande2=0;
 	switch (niveau){
 	    case 3:
-		while(operande1>1000 || operande2>1000 || operande1<=0 || operande2<=0){
+		while(operande1>1000 || operande2>9 || operande1<=0 || operande2<=0){
 		    operande1=(int)(random()*500);
 		    operande2=(int)(random()*500);
-		    print("    soucis ici     ");
 		}
 		break;
 	case 4:
@@ -225,8 +234,12 @@ class diplodocalcul extends Program{
 	default:
 	    println("Un soucis");
 	}
+	reponse[0]=""+operande1;
+	reponse[1]=""+operande2;
     }
     void division(int niveau,String [] reponse){
+	operande1=0;
+	operande2=0;
 	switch (niveau){
 	case 8:
 	    while(operande1>100 || operande2>15 || operande1<=0 || operande2<=0 || operande1%operande2!=0){
@@ -255,6 +268,8 @@ class diplodocalcul extends Program{
 	default:
 	    println("Un soucis");
 	}
+	reponse[0]=""+operande1;
+	reponse[1]=""+operande2;
     }
     /*Algorithme principal */
     void algorithm(){
@@ -295,7 +310,6 @@ class diplodocalcul extends Program{
 	if(mode==1){
 	    while(!continuerCalcul){
 		//on genere un calcul et on verifie le résultat tant que l'utilisateur ne veut pas arreter
-		
 		operateur(niveau);
 		//on calcule le résultat de l'operation
 		if(operateurChoisi.equals("+")){
@@ -310,6 +324,8 @@ class diplodocalcul extends Program{
 		}
 		else if(operateurChoisi.equals("*")){
 		    multiplication(niveau,reponse);
+		    println(Double.parseDouble(reponse[0])+"*"+Double.parseDouble(reponse[1]));
+		    reponseADonner=Double.parseDouble(reponse[0])*Double.parseDouble(reponse[1]);
 		}
 		reponseEleve= readInt();
 		if(reponseEleve==000){
