@@ -307,6 +307,8 @@ class diplodocalcul extends Program{
 		    mode=readInt();
 		}
 	    }
+
+	//mode illimite. On calcule tant que l'utilisateur ne rentre pas 000 comme reponse.
 	if(mode==1){
 	    while(!continuerCalcul){
 		//on genere un calcul et on verifie le résultat tant que l'utilisateur ne veut pas arreter
@@ -339,6 +341,7 @@ class diplodocalcul extends Program{
 		if(reponseEleve==000){
 		    continuerCalcul=true;
 		}
+		//on verifie le resultat. Si c est une division, on verifie egalement le reste
 		else{
 		    if(reponseEleve==reponseADonner){
 			if(operateurChoisi.equals("/")){
@@ -361,6 +364,7 @@ class diplodocalcul extends Program{
 	    }	
 	    println("Vous avez réalisé un score de: "+score+" points sur "+(calculs-1));
 	}
+	//on boucle sur 10 calculs.
 	else if(mode==2){
 	    for(int i=0;i<=9;i++){
 		//on genere un calcul et on verifie le résultat tant que l'utilisateur ne veut pas arreter
