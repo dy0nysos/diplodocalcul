@@ -93,7 +93,7 @@ class diplodocalcul extends Program{
 	    
 	default:
 	    println("Un soucis a ete detecte");
-		break;
+	    break;
 	}
 	reponse[0]=""+operande1;
 	reponse[1]=""+operande2;
@@ -116,12 +116,12 @@ class diplodocalcul extends Program{
 		print("soucis ici");
 	    }
 	    break;
-	    case 4:
-		while(operande1>10000 || operande2>10000 || operande1<=0 || operande2<=0){
-		    operande1=(int)(random()*10000);
-		    operande2=(int)(random()*10000);
-		}
-		break;
+	case 4:
+	    while(operande1>10000 || operande2>10000 || operande1<=0 || operande2<=0){
+		operande1=(int)(random()*10000);
+		operande2=(int)(random()*10000);
+	    }
+	    break;
 	case 5:
 	    while(operande1>50000 || operande2>50000 || operande1<=0 || operande2<=0){
 		operande1=(int)(random()*10000);
@@ -138,7 +138,7 @@ class diplodocalcul extends Program{
 	    while(operande1>50000 || operande2>50000 || operande1<=0 || operande2<=0){
 		operande1=(int)(random()*10000);
 		operande2=(int)(random()*10000);
-		}
+	    }
 	    break;
 	case 8:
 	    while(operande1>50000 || operande2>50000 || operande1<=0 || operande2<=0){
@@ -157,7 +157,7 @@ class diplodocalcul extends Program{
 		operande1=(int)(random()*10000);
 		operande2=(int)(random()*10000);
 	    }
-		break;
+	    break;
 	case 11:
 	    while(operande1>50000 || operande2>50000 || operande1<=0 || operande2<=0){
 		operande1=(int)(random()*10000);
@@ -166,8 +166,8 @@ class diplodocalcul extends Program{
 	    break;
 	    
 	default:
-		println("Un soucis a ete detecte");
-		break;
+	    println("Un soucis a ete detecte");
+	    break;
 	}
 	reponse[0]=""+operande1;
 	reponse[1]=""+operande2;
@@ -177,18 +177,18 @@ class diplodocalcul extends Program{
 	operande1=0;
 	operande2=0;
 	switch (niveau){
-	    case 3:
-		while(operande1>1000 || operande2>9 || operande1<=0 || operande2<=0){
-		    operande1=(int)(random()*500);
-		    operande2=(int)(random()*500);
-		}
-		break;
+	case 3:
+	    while(operande1>1000 || operande2>9 || operande1<=0 || operande2<=0){
+		operande1=(int)(random()*500);
+		operande2=(int)(random()*500);
+	    }
+	    break;
 	case 4:
-		while(operande1>10000 || operande2>10000 || operande1<=0 || operande2<=0){
-		    operande1=(int)(random()*10000);
-		    operande2=(int)(random()*10000);
-		}
-		break;
+	    while(operande1>10000 || operande2>10000 || operande1<=0 || operande2<=0){
+		operande1=(int)(random()*10000);
+		operande2=(int)(random()*10000);
+	    }
+	    break;
 	case 5:
 	    while(operande1>50000 || operande2>50000 || operande1<=0 || operande2<=0){
 		operande1=(int)(random()*10000);
@@ -197,9 +197,9 @@ class diplodocalcul extends Program{
 	    break;
 	case 6:
 	    while(operande1>50000 || operande2>50000 || operande1<=0 || operande2<=0){
-		    operande1=(int)(random()*10000);
-		    operande2=(int)(random()*10000);
-		}
+		operande1=(int)(random()*10000);
+		operande2=(int)(random()*10000);
+	    }
 	    break;
 	case 7:
 	    while(operande1>50000 || operande2>50000 || operande1<=0 || operande2<=0){
@@ -212,7 +212,7 @@ class diplodocalcul extends Program{
 		operande1=(int)(random()*10000);
 		operande2=(int)(random()*10000);
 	    }
-		break;
+	    break;
 	case 9:
 	    while(operande1>50000 || operande2>50000 || operande1<=0 || operande2<=0){
 		operande1=(int)(random()*10000);
@@ -227,8 +227,8 @@ class diplodocalcul extends Program{
 	    break;
 	case 11:
 	    while(operande1>50000 || operande2>50000 || operande1<=0 || operande2<=0){
-		    operande1=(int)(random()*10000);
-		    operande2=(int)(random()*10000);
+		operande1=(int)(random()*10000);
+		operande2=(int)(random()*10000);
 	    }
 	    break;
 	default:
@@ -254,7 +254,7 @@ class diplodocalcul extends Program{
 	    }
 	    break;
 	case 10:
-	    while(operande1>3000 || operande2>50 || operande1<=0 || operande2<=0){
+	    while(operande1>300 || operande2>20 || operande1<=0 || operande2<=0){
 		operande1=(int)(random()*3001);
 		operande2=(int)(random()*51);
 	    }
@@ -273,8 +273,8 @@ class diplodocalcul extends Program{
     }
     /*Algorithme principal */
     void algorithm(){
-	int niveau=0,reponseEleve=0,mode=0,score=0;
-	double reponseADonner=0;
+	int niveau=0,reponseEleve=0,mode=0,score=0,calculs=0;
+	double reponseADonner=0,reste=0,resteEleve=0;
 	boolean continuerCalcul=false,niveauCorrect=false,nomEtPrenom=false,modeCorrect=false;
 	String prenom="",nom="";
 	//Enregistrement nom et prenom
@@ -311,9 +311,11 @@ class diplodocalcul extends Program{
 	    while(!continuerCalcul){
 		//on genere un calcul et on verifie le résultat tant que l'utilisateur ne veut pas arreter
 		operateur(niveau);
+		calculs++;
 		//on calcule le résultat de l'operation
 		if(operateurChoisi.equals("+")){
 		    addition(niveau,reponse);
+		    println(reponse[0]);
 		    println(Double.parseDouble(reponse[0])+"+"+Double.parseDouble(reponse[1]));
 		    reponseADonner=Double.parseDouble(reponse[0])+Double.parseDouble(reponse[1]);
 		}
@@ -327,12 +329,27 @@ class diplodocalcul extends Program{
 		    println(Double.parseDouble(reponse[0])+"*"+Double.parseDouble(reponse[1]));
 		    reponseADonner=Double.parseDouble(reponse[0])*Double.parseDouble(reponse[1]);
 		}
+		else{
+		    division(niveau,reponse);
+		    println(Double.parseDouble(reponse[0])+"/"+Double.parseDouble(reponse[1]));
+		    reponseADonner=Double.parseDouble(reponse[0])/Double.parseDouble(reponse[1]);
+		    reste=Double.parseDouble(reponse[0])%Double.parseDouble(reponse[1]);
+		}
 		reponseEleve= readInt();
 		if(reponseEleve==000){
 		    continuerCalcul=true;
 		}
 		else{
 		    if(reponseEleve==reponseADonner){
+			if(operateurChoisi.equals("/")){
+			    if(resteEleve==reste){
+				score++;
+			    }
+			    else{
+				println("Reste incorrect");
+				println("Le reste était: "+reste);
+			    }
+			}
 			score++;
 			println("Résultat correct, votre score est de "+score+" points");
 		    }
@@ -340,11 +357,63 @@ class diplodocalcul extends Program{
 			println("Réponse incorrecte.");
 			println("La réponse correcte était: "+reponseADonner+" ");
 		    }
-		    
 		}
-	    }
+	    }	
+	    println("Vous avez réalisé un score de: "+score+" points sur "+(calculs-1));
 	}
 	else if(mode==2){
+	    for(int i=0;i<=9;i++){
+		//on genere un calcul et on verifie le résultat tant que l'utilisateur ne veut pas arreter
+		operateur(niveau);
+		calculs++;
+		//on calcule le résultat de l'operation
+		if(operateurChoisi.equals("+")){
+		    addition(niveau,reponse);
+		    println(reponse[0]);
+		    println(Double.parseDouble(reponse[0])+"+"+Double.parseDouble(reponse[1]));
+		    reponseADonner=Double.parseDouble(reponse[0])+Double.parseDouble(reponse[1]);
+		}
+		else if(operateurChoisi.equals("-")){
+		    soustraction(niveau,reponse);
+		    println(Double.parseDouble(reponse[0])+"-"+Double.parseDouble(reponse[1]));
+		    reponseADonner=Double.parseDouble(reponse[0])-Double.parseDouble(reponse[1]);
+		}
+		else if(operateurChoisi.equals("*")){
+		    multiplication(niveau,reponse);
+		    println(Double.parseDouble(reponse[0])+"*"+Double.parseDouble(reponse[1]));
+		    reponseADonner=Double.parseDouble(reponse[0])*Double.parseDouble(reponse[1]);
+		}
+		else{
+		    division(niveau,reponse);
+		    println(Double.parseDouble(reponse[0])+"/"+Double.parseDouble(reponse[1]));
+		    reponseADonner=Double.parseDouble(reponse[0])/Double.parseDouble(reponse[1]);
+		    reste=Double.parseDouble(reponse[0])%Double.parseDouble(reponse[1]);
+		}
+		reponseEleve= readInt();
+		if(reponseEleve==000){
+		    continuerCalcul=true;
+		}
+		else{
+		    if(reponseEleve==reponseADonner){
+			if(operateurChoisi.equals("/")){
+			    if(resteEleve==reste){
+				score++;
+			    }
+			    else{
+				println("Reste incorrect");
+				println("Le reste était: "+reste);
+			    }
+			}
+			score++;
+			println("Résultat correct, votre score est de "+score+" points");
+		    }
+		    else{
+			println("Réponse incorrecte.");
+			println("La réponse correcte était: "+reponseADonner+" ");
+		    }
+		}
+	    }
+	    println("Vous avez réalisé un score de: "+score+" points sur "+(calculs));
 	}
 	else{
 	    println("Une erreur impromptue s'est produite. Veuillez quitter le logiciel et relancer");
