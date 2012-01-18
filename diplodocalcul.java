@@ -9,7 +9,7 @@ class diplodocalcul extends Program{
 	CSVFile fichiercsv=loadCSV("resultats.csv");
 	int nombreligne= rowCount(fichiercsv);
 	int nombrecolonne= columnCount(fichiercsv);
-	tab=new String [nombreligne+1][nombrecolonne];
+	tab=new String [nombreligne+1][4];
 	for(int i=0;i<nombreligne;i++){
 	    for(int j=0;j<nombrecolonne;j++){
 		tab[i][j]=getCell(fichiercsv,i,j);
@@ -379,8 +379,7 @@ class diplodocalcul extends Program{
 		    } 
 		}
 	    }
-	    println("Vous avez réalisé un score de: "+score+" points sur "+(calculs));
-	    enregistrementres(nom,prenom,""+niveau,""+score);
+	    println("Vous avez réalisé un score de: "+score+" points sur "+(calculs-1));
 	}
 	
 	//GESTION DU MODE EXAMEN
