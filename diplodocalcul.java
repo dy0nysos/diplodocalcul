@@ -234,7 +234,6 @@ class diplodocalcul extends Program{
 	}
 	reponse[0]=""+operande1;
 	reponse[1]=""+operande2;
-	println(reponse[0]+"    "+reponse[1]);
     }
     //fonction de calcul du resultat
     double resultatAddition(String nombre1,String nombre2){
@@ -316,142 +315,147 @@ class diplodocalcul extends Program{
 	//MODE APPRENTISSAGE. stop pour quitter
 	if(mode==1) {
 	    while(!continuerCalcul){
-		//on genere un calcul et on verifie le resultat tant que l'utilisateur ne veut pas arreter
-		operateur(niveau);
-		calculs++;
-		//on calcule le resultat de l'operation
-		if(operateurChoisi.equals("+")){
-		    addition(niveau,reponse);
-		    reponseADonner=resultatAddition(reponse[0],reponse[1]);
-		}
-		else if(operateurChoisi.equals("-")){
-		    soustraction(niveau,reponse);
-		    reponseADonner=resultatSoustraction(reponse[0],reponse[1]);
-		}
-		else if(operateurChoisi.equals("*")){
-		    multiplication(niveau,reponse);
-		    reponseADonner=resultatMultiplication(reponse[0],reponse[1]);
-		}
-		else{
-		    division(niveau,reponse);
-		    number1=Double.parseDouble(reponse[0]);
-		    number2=Double.parseDouble(reponse[1]);
-		    println(number1+"/"+number2);
-		    reponseADonner=(number1/number2);
-		    reste=number1%number2;
-		}
-		//demande de la reponse de l'eleve.
-		if(operateurChoisi.equals("/") && niveau<11){
-		    println("Quel est le quotient? (stop pour quitter)");
-		    reponseString= readString();
-		    println("quel est le reste? (stop pour quitter)");
-		    resteString=readString();
-		}
-		else {
-		    println("quel est la réponse?(stop pour quitter)");
-		    reponseString=readString();
-		}
-		//
-		if(reponseString.equals("stop") || resteString.equals("stop")){
-		    continuerCalcul=true;
-		}
-		//on verifie le resultat. Si c est une division, on verifie egalement le reste
-		else{
-		    reponseEleve=Double.parseDouble(reponseString);
-		    if(reponseEleve<=reponseADonner+0.01 && reponseEleve >= reponseADonner-0.01){
-			if(operateurChoisi.equals("/") && niveau<11){
-			    resteEleve=Double.parseDouble(resteString);
-			    if(resteEleve==reste){
-				score++;
-			    }
-			    else{
-				println("Reste incorrect");
-				println("Le reste était: "+reste);
-			    }
-			}
-			score++;
-			println("Résultat correct, votre score est de "+score+" points");
+		    //on genere un calcul et on verifie le resultat tant que l'utilisateur ne veut pas arreter
+		    operateur(niveau);
+		    calculs++;
+		    reponseString="";
+		    resteString="";
+
+		    //on calcule le resultat de l'operation
+		    if(operateurChoisi.equals("+")){
+			addition(niveau,reponse);
+			reponseADonner=resultatAddition(reponse[0],reponse[1]);
+		    }
+		    else if(operateurChoisi.equals("-")){
+			soustraction(niveau,reponse);
+			reponseADonner=resultatSoustraction(reponse[0],reponse[1]);
+		    }
+		    else if(operateurChoisi.equals("*")){
+			multiplication(niveau,reponse);
+			reponseADonner=resultatMultiplication(reponse[0],reponse[1]);
 		    }
 		    else{
-			println("Réponse incorrecte.");
-			println("La réponse correcte était: "+reponseADonner+" ");
-		    } 
+			division(niveau,reponse);
+			number1=Double.parseDouble(reponse[0]);
+			number2=Double.parseDouble(reponse[1]);
+			println(number1+"/"+number2);
+			reponseADonner=(int)(number1/number2);
+			reste=(int)(number1%number2);
+		    }
+
+		    //demande de la reponse de l'eleve.
+		    if(operateurChoisi.equals("/") && (Double.parseDouble(reponse[0])%Double.parseDouble(reponse[1]))>1){
+			println("Quel est le quotient?");
+			while(reponseString.equals("")){
+			    reponseString= readString();
+			}
+			println("quel est le reste?");
+			while(resteString.equals("")){
+			    resteString=readString();
+			}
+		    }
+		    else {
+			println("quel est la réponse?");
+		    while(reponseString.equals("")){
+			reponseString=readString();}
 		}
+		
+		//on verifie le resultat. Si c est une division, on verifie egalement le reste
+		reponseEleve=Double.parseDouble(reponseString);
+		if(reponseEleve<=(reponseADonner+0.01) && reponseEleve >= reponseADonner-0.01){
+		    if(operateurChoisi.equals("/") && niveau<=11){
+			resteEleve=Double.parseDouble(resteString);
+			if(resteEleve!=reste){
+			    println("Reste incorrect");
+			}
+		    }
+		    score++;
+		    println("Résultat correct, votre score est de "+score+" points");
+		}
+		
+		else{
+		    println("Réponse incorrecte.");
+		} 
+		
+		println("Vous avez réalisé un score de: "+score+" points sur "+(calculs));
 	    }
-	    println("Vous avez réalisé un score de: "+score+" points sur "+(calculs-1));
 	}
 	
 	//GESTION DU MODE EXAMEN
 	//Boucle sur 10 calcul.
 	else if(mode==2){
-	    for(int i=0;i<=9;i++){
-		//on genere un calcul et on verifie le resultat tant que l'utilisateur ne veut pas arreter
-		operateur(niveau);
-		calculs++;
-		//on calcule le resultat de l'operation
-		if(operateurChoisi.equals("+")){
-		    addition(niveau,reponse);
-		    reponseADonner=resultatAddition(reponse[0],reponse[1]);
-		}
-		else if(operateurChoisi.equals("-")){
-		    soustraction(niveau,reponse);
-		    reponseADonner=resultatSoustraction(reponse[0],reponse[1]);
-		}
-		else if(operateurChoisi.equals("*")){
-		    multiplication(niveau,reponse);
-		    reponseADonner=resultatMultiplication(reponse[0],reponse[1]);
-		}
-		else{
-		    division(niveau,reponse);
-		    number1=Double.parseDouble(reponse[0]);
-		    number2=Double.parseDouble(reponse[1]);
-		    println(number1+"/"+number2);
-		    reponseADonner=(number1/number2);
-		    reste=number1%number2;
-		}
-		//demande de la reponse de l'eleve.
-		if(operateurChoisi.equals("/") && niveau<11){
-		    println("Quel est le quotient? (stop pour quitter)");
-		    reponseString= readString();
-		    println("quel est le reste? (stop pour quitter)");
-		    resteString=readString();
-		}
-		else {
-		    println("quel est la réponse?(stop pour quitter)");
-		    reponseString=readString();
-		}
-		//
-		if(reponseString.equals("stop") || resteString.equals("stop")){
-		    continuerCalcul=true;
-		}
-		//on verifie le resultat. Si c est une division, on verifie egalement le reste
-		else{
-		    reponseEleve=Double.parseDouble(reponseString);
-		    if(reponseEleve<=reponseADonner+0.01 && reponseEleve >= reponseADonner-0.01){
-			if(operateurChoisi.equals("/") && niveau<11){
-			    resteEleve=Double.parseDouble(resteString);
-			    if(resteEleve==reste){
-				score++;
-			    }
-			    else{
-				println("Reste incorrect");
-				println("Le reste était: "+reste);
-			    }
-			}
-			score++;
-			println("Résultat correct, votre score est de "+score+" points");
+	    for(int i=0;i<=9;i++)
+		{
+
+		    //on genere un calcul et on verifie le resultat tant que l'utilisateur ne veut pas arreter
+		    operateur(niveau);
+		    calculs++;
+		    reponseString="";
+		    resteString="";
+
+		    //on calcule le resultat de l'operation
+		    if(operateurChoisi.equals("+")){
+			addition(niveau,reponse);
+			reponseADonner=resultatAddition(reponse[0],reponse[1]);
+		    }
+		    else if(operateurChoisi.equals("-")){
+			soustraction(niveau,reponse);
+			reponseADonner=resultatSoustraction(reponse[0],reponse[1]);
+		    }
+		    else if(operateurChoisi.equals("*")){
+			multiplication(niveau,reponse);
+			reponseADonner=resultatMultiplication(reponse[0],reponse[1]);
 		    }
 		    else{
-			println("Réponse incorrecte.");
-			println("La réponse correcte était: "+reponseADonner+" ");
-		    } 
+			division(niveau,reponse);
+			number1=Double.parseDouble(reponse[0]);
+			number2=Double.parseDouble(reponse[1]);
+			println(number1+"/"+number2);
+			reponseADonner=(int)(number1/number2);
+			reste=(int)(number1%number2);
+		    }
+
+		    //demande de la reponse de l'eleve.
+		    if(operateurChoisi.equals("/") && (Double.parseDouble(reponse[0])%Double.parseDouble(reponse[1]))>1){
+			println("Quel est le quotient?");
+			while(reponseString.equals("")){
+			    reponseString= readString();
+			}
+			println("quel est le reste?");
+			while(resteString.equals("")){
+			    resteString=readString();
+			}
+		    }
+		    else {
+			println("quel est la réponse?");
+		    while(reponseString.equals("")){
+			reponseString=readString();}
 		}
+		
+		//on verifie le resultat. Si c est une division, on verifie egalement le reste
+		reponseEleve=Double.parseDouble(reponseString);
+		if(reponseEleve<=(reponseADonner+0.01) && reponseEleve >= reponseADonner-0.01){
+		    if(operateurChoisi.equals("/") && niveau<=11){
+			resteEleve=Double.parseDouble(resteString);
+			if(resteEleve!=reste){
+			    println("Reste incorrect");
+			}
+		    }
+		    score++;
+		    println("Résultat correct, votre score est de "+score+" points");
+		}
+		
+		else{
+		    println("Réponse incorrecte.");
+		} 
 	    }
+	    
 	    println("Vous avez réalisé un score de: "+score+" points sur "+(calculs));
 	    enregistrementres(nom,prenom,""+niveau,""+score);
 	}
 	else{
 	    println("Une erreur impromptue s'est produite. Veuillez quitter le logiciel et relancer");
+	    
 	}
     }
 }
