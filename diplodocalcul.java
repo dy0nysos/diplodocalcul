@@ -279,7 +279,7 @@ class diplodocalcul extends Program{
 	    if(classe >=1 && classe <= 5){
 		niveauCorrect=true;}
 	    else{
-		println("Veuillez choisir la classe: \n1)CP \n2)CE1 \n3)CE2 \n4)CM1 \n5)CM2");
+		println("Tapez le numero de la classe choisie: \n1)CP \n2)CE1 \n3)CE2 \n4)CM1 \n5)CM2");
 		classe=readInt();
 		if (classe==1){
 		    niveau=1;
@@ -370,7 +370,7 @@ class diplodocalcul extends Program{
 			}
 		    }
 		    score++;
-		    println("Résultat correct, votre score est de "+score+" points");
+		    println("Résultat correct");
 		}
 		
 		else{
@@ -442,7 +442,7 @@ class diplodocalcul extends Program{
 			}
 		    }
 		    score++;
-		    println("Résultat correct, votre score est de "+score+" points");
+		    println("Résultat correct");
 		}
 		
 		else{
