@@ -254,14 +254,14 @@ class diplodocalcul extends Program{
 	println(number1+" x "+number2);
 	return (number1*number2);
     }
-
+    
     /*Corps de l'algorithme*/
     void algorithm(){
 	int niveau=0,mode=0,score=0,calculs=0,classe=0;
 	double reponseADonner=0,reste=0,resteEleve=0, reponseEleve=0,number1=0,number2=0;
 	boolean continuerCalcul=false,niveauCorrect=false,nomEtPrenom=false,modeCorrect=false;
 	String prenom="",nom="",reponseString="",resteString="";
-
+	
 	//Enregistrement nom et prenom
 	while(!nomEtPrenom){
 	    if(nom != "" && prenom != ""){
@@ -315,13 +315,13 @@ class diplodocalcul extends Program{
 	//MODE APPRENTISSAGE. stop pour quitter
 	if(mode==1) {
 	    while(!continuerCalcul){
-		    //on genere un calcul et on verifie le resultat tant que l'utilisateur ne veut pas arreter
-		    operateur(niveau);
-		    calculs++;
-		    reponseString="";
-		    resteString="";
-
-		    //on calcule le resultat de l'operation
+		//on genere un calcul et on verifie le resultat tant que l'utilisateur ne veut pas arreter
+		operateur(niveau);
+		calculs++;
+		reponseString="";
+		resteString="999999999";
+		
+		//on calcule le resultat de l'operation
 		    if(operateurChoisi.equals("+")){
 			addition(niveau,reponse);
 			reponseADonner=resultatAddition(reponse[0],reponse[1]);
@@ -342,41 +342,42 @@ class diplodocalcul extends Program{
 			reponseADonner=(int)(number1/number2);
 			reste=(int)(number1%number2);
 		    }
-
-		    //demande de la reponse de l'eleve.
-		    if(operateurChoisi.equals("/") && (Double.parseDouble(reponse[0])%Double.parseDouble(reponse[1]))>1){
-			println("Quel est le quotient?");
-			while(reponseString.equals("")){
-			    reponseString= readString();
-			}
-			println("quel est le reste?");
-			while(resteString.equals("")){
-			    resteString=readString();
-			}
+		
+		//demande de la reponse de l'eleve.
+		if(operateurChoisi.equals("/") && (Double.parseDouble(reponse[0])%Double.parseDouble(reponse[1]))>1){
+		    println("Quel est le quotient?");
+		    while(reponseString.equals("")){
+			reponseString= readString();
 		    }
-		    else {
-			println("quel est la réponse?");
+		    println("quel est le reste?");
+		    while(resteString.equals("")){
+			resteString=readString();
+		    }
+		}
+		else {
+		    println("quel est la réponse?");
 		    while(reponseString.equals("")){
 			reponseString=readString();}
 		}
 		
-		//on verifie le resultat. Si c est une division, on verifie egalement le reste
-		reponseEleve=Double.parseDouble(reponseString);
-		if(reponseEleve<=(reponseADonner+0.01) && reponseEleve >= reponseADonner-0.01){
-		    if(operateurChoisi.equals("/") && niveau<=11){
+		    //on verifie le resultat. Si c est une division, on verifie egalement le reste
+		    reponseEleve=Double.parseDouble(reponseString);
+		    if(reponseEleve<=(reponseADonner+0.01) && reponseEleve >= reponseADonner-0.01){
+			println("reponse correcte");
+		    }    
+		    else{
+			println("Réponse incorrecte.");
+		    }
+		    if(operateurChoisi.equals("/") && (Double.parseDouble(reponse[0])%Double.parseDouble(reponse[1]))>=1){	
 			resteEleve=Double.parseDouble(resteString);
-			if(resteEleve!=reste){
+			if(resteEleve==reste){
+			    println("Reste correct");
+			    score++;
+			}
+			else{
 			    println("Reste incorrect");
 			}
-		    }
-		    score++;
-		    println("Résultat correct");
-		}
-		
-		else{
-		    println("Réponse incorrecte.");
-		} 
-		
+		    }			
 		println("Vous avez réalisé un score de: "+score+" points sur "+(calculs));
 	    }
 	}
@@ -386,13 +387,13 @@ class diplodocalcul extends Program{
 	else if(mode==2){
 	    for(int i=0;i<=9;i++)
 		{
-
+		    
 		    //on genere un calcul et on verifie le resultat tant que l'utilisateur ne veut pas arreter
 		    operateur(niveau);
 		    calculs++;
 		    reponseString="";
 		    resteString="";
-
+		    
 		    //on calcule le resultat de l'operation
 		    if(operateurChoisi.equals("+")){
 			addition(niveau,reponse);
@@ -414,7 +415,7 @@ class diplodocalcul extends Program{
 			reponseADonner=(int)(number1/number2);
 			reste=(int)(number1%number2);
 		    }
-
+		    
 		    //demande de la reponse de l'eleve.
 		    if(operateurChoisi.equals("/") && (Double.parseDouble(reponse[0])%Double.parseDouble(reponse[1]))>1){
 			println("Quel est le quotient?");
@@ -428,27 +429,29 @@ class diplodocalcul extends Program{
 		    }
 		    else {
 			println("quel est la réponse?");
-		    while(reponseString.equals("")){
-			reponseString=readString();}
-		}
-		
-		//on verifie le resultat. Si c est une division, on verifie egalement le reste
-		reponseEleve=Double.parseDouble(reponseString);
-		if(reponseEleve<=(reponseADonner+0.01) && reponseEleve >= reponseADonner-0.01){
-		    if(operateurChoisi.equals("/") && niveau<=11){
+			while(reponseString.equals("")){
+			    reponseString=readString();}
+		    }
+		    
+		    //on verifie le resultat. Si c est une division, on verifie egalement le reste
+		    reponseEleve=Double.parseDouble(reponseString);
+		    if(reponseEleve<=(reponseADonner+0.01) && reponseEleve >= reponseADonner-0.01){
+			println("reponse correcte");
+		    }    
+		    else{
+			println("Réponse incorrecte.");
+		    }
+		    if(operateurChoisi.equals("/") && (Double.parseDouble(reponse[0])%Double.parseDouble(reponse[1]))>=1){
 			resteEleve=Double.parseDouble(resteString);
-			if(resteEleve!=reste){
+			if(resteEleve==reste){
+			    println("Reste correct");
+			    score++;
+			}
+			else{
 			    println("Reste incorrect");
 			}
 		    }
-		    score++;
-		    println("Résultat correct");
 		}
-		
-		else{
-		    println("Réponse incorrecte.");
-		} 
-	    }
 	    
 	    println("Vous avez réalisé un score de: "+score+" points sur "+(calculs));
 	    enregistrementres(nom,prenom,""+niveau,""+score);
