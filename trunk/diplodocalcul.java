@@ -8,10 +8,9 @@ class diplodocalcul extends Program{
 	String [][] tab;
 	CSVFile fichiercsv=loadCSV("resultats.csv");
 	int nombreligne= rowCount(fichiercsv);
-	int nombrecolonne= columnCount(fichiercsv);
 	tab=new String [nombreligne+1][4];
 	for(int i=0;i<nombreligne;i++){
-	    for(int j=0;j<nombrecolonne;j++){
+	    for(int j=0;j<4;j++){
 		tab[i][j]=getCell(fichiercsv,i,j);
 	    }
 	}
