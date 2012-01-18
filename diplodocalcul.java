@@ -2,26 +2,27 @@ class diplodocalcul extends Program{
     //variables globales
     String operateurChoisi;
     double operande1=0,operande2=0;
-    //cette procedure genere aleatoirement en fonction du niveau un operateur qui sera utilise dans le calcul
     String [] reponse = new String [2];
-    double resultatAddition(String nombre1,String nombre2){
-	double number1=Double.parseDouble(nombre1);
-	double number2=Double.parseDouble(nombre2);
-	println(number1+" + "+number2);
-	return (number1+number2);
+    //procedure enregistrement resultats eleves
+    void enregistrementres(String prenom,String nom,String niveau,String score){
+	String [][] tab;
+	CSVFile fichiercsv=loadCSV("resultats.csv");
+	int nombreligne= rowCount(fichiercsv);
+	int nombrecolonne= columnCount(fichiercsv);
+	tab=new String [nombreligne+1][nombrecolonne];
+	for(int i=0;i<nombreligne;i++){
+	    for(int j=0;j<nombrecolonne;j++){
+		tab[i][j]=getCell(fichiercsv,i,j);
+	    }
+	}
+	tab[nombreligne][0]=nom;
+	tab[nombreligne][1]=prenom;
+	tab[nombreligne][2]=niveau;
+	tab[nombreligne][3]=score;
+	saveCSV(tab,"resultats.csv");
     }
-    double resultatSoustraction(String nombre1,String nombre2){
-	double number1=Double.parseDouble(nombre1);
-	double number2=Double.parseDouble(nombre2);
-	println(number1+" - "+number2);
-	return (number1-number2);
-    }
-    double resultatMultiplication(String nombre1,String nombre2){
-	double number1=Double.parseDouble(nombre1);
-	double number2=Double.parseDouble(nombre2);
-	println(number1+" x "+number2);
-	return (number1*number2);
-    }
+    
+    //cette procedure genere aleatoirement en fonction du niveau un operateur qui sera utilise dans le calcul
     void operateur(int niveau){
 	String [] operateurs = new String [12];
 	operateurs[0]="+";//add simple = niveau 1
@@ -77,7 +78,7 @@ class diplodocalcul extends Program{
 	case 10:
 	case 11:
 	case 12:
-	    operande1=((int)((random()*10000)+1))/1000.0;
+	    operande1=((int)((random()*10000)+1))/100.0;
 	    operande2=((int)((random()*10000)+1))/10.0;
 	    break;
 	default:
@@ -126,20 +127,17 @@ class diplodocalcul extends Program{
 	    operande2=((int)(random()*10000)+1)/100.0;
 	    break;
 	case 9:
-	    operande1=((int)(random()*10000)+1)/1000.0;
+	    operande1=((int)(random()*10000)+1)/100.0;
 	    operande2=((int)(random()*10000)+1)/10.0;
   	    break;
 	case 10:
-	    operande1=((int)(random()*100000)+1)/1000.0;
+	    operande1=((int)(random()*100000)+1)/10.0;
 	    operande2=((int)(random()*100000)+1)/100.0;
 	    break;
 	case 11:
-	    operande1=((int)(random()*100000)+1)/10.0;
-	    operande2=((int)(random()*100000)+1)/1000.0;    
-	    break;
 	case 12:
-	    operande1=((int)(random()*100000)+1)/1000.0;
-	    operande2=((int)(random()*100000)+1)/1000.0; 
+	    operande1=((int)(random()*100000)+1)/100.0;
+	    operande2=((int)(random()*100000)+1)/100.0; 
 	    break;
 	default:
 	    println("Un soucis a ete detecte");
@@ -228,7 +226,7 @@ class diplodocalcul extends Program{
 	    operande2=(int)(random()*30)+1;
 	    break;
 	case 12:
-	    operande1=((int)(random()*1000)+1);
+	    operande1=((int)(random()*1000)+1)/10.0;
 	    operande2=(int)((random()*50)+1);
 	    break;
 	default:
@@ -239,8 +237,25 @@ class diplodocalcul extends Program{
 	reponse[1]=""+operande2;
 	println(reponse[0]+"    "+reponse[1]);
     }
-
-
+    //fonction de calcul du resultat
+    double resultatAddition(String nombre1,String nombre2){
+	double number1=Double.parseDouble(nombre1);
+	double number2=Double.parseDouble(nombre2);
+	println(number1+" + "+number2);
+	return (number1+number2);
+    }
+    double resultatSoustraction(String nombre1,String nombre2){
+	double number1=Double.parseDouble(nombre1);
+	double number2=Double.parseDouble(nombre2);
+	println(number1+" - "+number2);
+	return (number1-number2);
+    }
+    double resultatMultiplication(String nombre1,String nombre2){
+	double number1=Double.parseDouble(nombre1);
+	double number2=Double.parseDouble(nombre2);
+	println(number1+" x "+number2);
+	return (number1*number2);
+    }
 
     /*Corps de l'algorithme*/
     void algorithm(){
@@ -260,7 +275,7 @@ class diplodocalcul extends Program{
 		nom=readString();
 	    }
 	}
-
+	
 	//enregistrement niveau
 	while(!niveauCorrect){
 	    if(classe >=1 && classe <= 5){
@@ -287,25 +302,25 @@ class diplodocalcul extends Program{
 		}
 	    }
 	}
-
+	
 	//choix du mode
 	while(!modeCorrect)
 	    {if(mode >= 1 && mode <= 2){
 		    modeCorrect = true;
 		}
 		else{
-		    println("Veuillez choisir le mode:\n1)Apprentissage(illimité)\n2)Examen");
+		    println("Tapez le numero du mode choisi:\n1)Apprentissage(illimité)\n2)Examen");
 		    mode=readInt();
 		}
 	    }
-
+	
 	//MODE APPRENTISSAGE. stop pour quitter
-	if(mode==1){
+	if(mode==1) {
 	    while(!continuerCalcul){
-		//on genere un calcul et on verifie le resultat tant que l'utilisateur ne veut pas arreter. On a egalement besoin du nombre de calcul
+		//on genere un calcul et on verifie le resultat tant que l'utilisateur ne veut pas arreter
 		operateur(niveau);
 		calculs++;
-		//on calcule le resultat de l'operation. Utilisation de l'operateurChoisi.
+		//on calcule le resultat de l'operation
 		if(operateurChoisi.equals("+")){
 		    addition(niveau,reponse);
 		    reponseADonner=resultatAddition(reponse[0],reponse[1]);
@@ -328,24 +343,25 @@ class diplodocalcul extends Program{
 		}
 		//demande de la reponse de l'eleve.
 		if(operateurChoisi.equals("/") && niveau<11){
-		    println("Quel est le quotient?");
+		    println("Quel est le quotient? (stop pour quitter)");
 		    reponseString= readString();
-		    println("quel est le reste?");
+		    println("quel est le reste? (stop pour quitter)");
 		    resteString=readString();
 		}
 		else {
-		    println("quel est la réponse?");
+		    println("quel est la réponse?(stop pour quitter)");
 		    reponseString=readString();
 		}
-		//flag de sortie du mode illimite
+		//
 		if(reponseString.equals("stop") || resteString.equals("stop")){
 		    continuerCalcul=true;
 		}
 		//on verifie le resultat. Si c est une division, on verifie egalement le reste
 		else{
 		    reponseEleve=Double.parseDouble(reponseString);
-		    if(reponseEleve==reponseADonner){
+		    if(reponseEleve<=reponseADonner+0.01 && reponseEleve >= reponseADonner-0.01){
 			if(operateurChoisi.equals("/") && niveau<11){
+			    resteEleve=Double.parseDouble(resteString);
 			    if(resteEleve==reste){
 				score++;
 			    }
@@ -360,11 +376,13 @@ class diplodocalcul extends Program{
 		    else{
 			println("Réponse incorrecte.");
 			println("La réponse correcte était: "+reponseADonner+" ");
-		    }
+		    } 
 		}
-	    }	
-	    println("Vous avez réalisé un score de: "+score+" points sur "+(calculs-1));
+	    }
+	    println("Vous avez réalisé un score de: "+score+" points sur "+(calculs));
+	    enregistrementres(nom,prenom,""+niveau,""+score);
 	}
+	
 	//GESTION DU MODE EXAMEN
 	//Boucle sur 10 calcul.
 	else if(mode==2){
@@ -395,13 +413,13 @@ class diplodocalcul extends Program{
 		}
 		//demande de la reponse de l'eleve.
 		if(operateurChoisi.equals("/") && niveau<11){
-		    println("Quel est le quotient?");
+		    println("Quel est le quotient? (stop pour quitter)");
 		    reponseString= readString();
-		    println("quel est le reste?");
+		    println("quel est le reste? (stop pour quitter)");
 		    resteString=readString();
 		}
 		else {
-		    println("quel est la réponse?");
+		    println("quel est la réponse?(stop pour quitter)");
 		    reponseString=readString();
 		}
 		//
@@ -411,8 +429,9 @@ class diplodocalcul extends Program{
 		//on verifie le resultat. Si c est une division, on verifie egalement le reste
 		else{
 		    reponseEleve=Double.parseDouble(reponseString);
-		    if(reponseEleve<=reponseADonner+0.01 || reponseEleve >= reponseADonner-0.01){
+		    if(reponseEleve<=reponseADonner+0.01 && reponseEleve >= reponseADonner-0.01){
 			if(operateurChoisi.equals("/") && niveau<11){
+			    resteEleve=Double.parseDouble(resteString);
 			    if(resteEleve==reste){
 				score++;
 			    }
@@ -431,6 +450,7 @@ class diplodocalcul extends Program{
 		}
 	    }
 	    println("Vous avez réalisé un score de: "+score+" points sur "+(calculs));
+	    enregistrementres(nom,prenom,""+niveau,""+score);
 	}
 	else{
 	    println("Une erreur impromptue s'est produite. Veuillez quitter le logiciel et relancer");
