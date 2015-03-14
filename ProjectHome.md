@@ -1,0 +1,1 @@
+The aim of this project for the algorithmic and programmation module is to program a software which helps children to learn mathematics
